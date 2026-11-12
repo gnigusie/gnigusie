@@ -112,7 +112,7 @@ I am interested in research and engineering opportunities in the following areas
 - Low-resource language technologies and multilingual NLP.
 - Generative AI, LLM fine-tuning, and retrieval-augmented generation.
 - Reliable AI agents and data-grounded applications.
-- Lightweight deep learning and medical computer vision.
+- Lightweight deep learning and computer vision.
 - AI applications for African languages, music, and cultural heritage.
 
-I welcome collaboration with researchers, engineering teams, and organizations engaged in meaningful applications of artificial intelligence.
+I welcome collaboration with researchers, engineering teams, and organizations working on AI model development and integration into UI and software development.

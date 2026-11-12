@@ -1,4 +1,4 @@
-# Gebregziabihier Nigusie Birhane
+## Gebregziabihier Nigusie Birhane
 
 I worked on RAG for text-to-SQL report generation and on fusion models for archiving African heritage sounds. I fine-tuned pretrained models for low-resource languages like Amharic and built a lightweight mobile model for pneumonia detection from chest X-rays. I'm open to research and project collaborations in language technologies, computer vision, and software development.
 

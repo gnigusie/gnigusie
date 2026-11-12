@@ -3,7 +3,7 @@
 ### AI Engineer & Machine Learning Researcher
 *Developing intelligent systems at the intersection of applied AI research, language technologies, and generative models.*
 
-I am an AI engineer and machine learning researcher working on language technologies for low-resource languages, lightweight deep learning for medical imaging, and generative AI for structured data and cultural heritage. My work includes Amharic text complexity detection and simplification, mobile pneumonia detection from chest X-rays, a RAG-based financial report generation agent at Rubani, and the Heritage in Code project at Wits Innovation Center.
+I worked on RAG that turns user prompts into SQL queries for report generation, and on archiving African heritage sounds with a fusion model for creative reuse. I fine-tuned pretrained models for low-resource languages such as Amharic, and developed a lightweight mobile model for pneumonia detection from chest X-rays. I am interested in research and project collaborations, especially in AI for language technologies and computer vision.
 
 **[Portfolio](https://gnigusie.github.io/)** | **[CV](https://gnigusie.github.io/Gebregziabihier_Nigusie_CV.pdf)** | **[LinkedIn](https://www.linkedin.com/in/gerenigusie)** | **[Email](mailto:gere.nigusie@gmail.com)**
 

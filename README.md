@@ -2,7 +2,7 @@
 
 I worked on RAG that turns user prompts into SQL queries for report generation, and on archiving African heritage sounds with a fusion model for creative reuse. I fine-tuned pretrained models for low-resource languages such as Amharic, and developed a lightweight mobile model for pneumonia detection from chest X-rays. I am interested in research and project collaborations, especially in AI for language technologies and computer vision.
 
-**[Portfolio](https://gnigusie.github.io/)** | **[CV](https://gnigusie.github.io/Gebregziabihier_Nigusie_CV.pdf)** | **[LinkedIn](https://www.linkedin.com/in/gerenigusie)** | **[Email](mailto:gere.nigusie@gmail.com)**
+**[CV](https://gnigusie.github.io/Gebregziabihier_Nigusie_CV.pdf)** | **[LinkedIn](https://www.linkedin.com/in/gerenigusie)** | **[Email](mailto:gere.nigusie@gmail.com)** | **[More](https://gnigusie.github.io)** 
 
 ---
 

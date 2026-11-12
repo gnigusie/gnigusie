@@ -24,7 +24,7 @@ Key contributions:
 
 **Project:** [heritageincode.com](https://www.heritageincode.com/)
 
-### Mobile Pneumonia Detection
+### Mobile based Pneumonia Detection
 **Research Project | MICCAI 2025 Workshop**
 
 Developed a contour-guided segmentation and X-ray validation approach for pneumonia detection, together with a lightweight deep learning model targeting real-time mobile inference.

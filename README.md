@@ -43,7 +43,7 @@ Key contributions:
 - Fine-tuned a Qwen 3B model using RAG-based supervision for financial report synthesis.
 - Integrated retrieved tabular data into structured report generation workflows.
 
-**Technical focus:** Python, RAG, Qwen, LLM Fine-tuning, SQL, Vector Retrieval.
+**Tools & Technologies:** Python, RAG, Qwen, LLM Fine-tuning, SQL, Vector Retrieval.
 
 ---
 

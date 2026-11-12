@@ -22,10 +22,10 @@ RAG pipeline for schema ranking and natural-language-to-SQL, with a fine-tuned Q
 
 ## Publications
 
-- [Contour-guided segmentation and X-ray validation for pneumonia detection on mobile](https://doi.org/10.1007/978-3-032-13654-1_30), *MICCAI Workshop*, 2026
-- [Sentiment polarity analysis of Amharic climate change discourse using LLMs](https://proceedings.mlr.press/v302/nigusie26a.html), *PMLR*, 2026
-- [Supervised ML-based Amharic text complexity classification](https://doi.org/10.18653/v1/2025.africanlp-1.2), *AfricaNLP*, 2025
-[More...](https://gnigusie.github.io)
+Contour-guided segmentation and X-ray validation for pneumonia detection on mobile, [MICCAI Workshop](https://doi.org/10.1007/978-3-032-13654-1_30), 2026
+ 
+Sentiment polarity analysis of Amharic climate change discourse using LLMs, [PMLR](https://proceedings.mlr.press/v302/nigusie26a.html), 2026 [More...](https://gnigusie.github.io)
+
 ---
 
 ## Technical Stack

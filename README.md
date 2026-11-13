@@ -3,7 +3,7 @@
 I work across NLP, Computer Vision, Generative AI, software development, and integrating AI into user applications.
 
 <p>
-  <img src="https://streak-stats.demolab.com/?user=gnigusie&background=141321&border=e4e2e2&stroke=e4e2e2&ring=7bf1a8&fire=7bf1a8&currStreakNum=79c0ff&currStreakLabel=79c0ff&sideNums=7bf1a8&sideLabels=79c0ff&dates=a9fef7" alt="Streak stats" />
+  <img src="./streak-stats.svg" alt="Streak stats" />
 </p>
 
 <p>

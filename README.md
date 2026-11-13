@@ -1,13 +1,13 @@
 # Gebregziabihier Nigusie Birhane
 
-AI Engineer and Software Developer specializing in Generative AI, NLP, and Computer Vision.
+I work across NLP, Computer Vision, Generative AI, software development, and integrating AI into user applications.
 
 [CV](https://gnigusie.github.io/Gebregziabihier_Nigusie_CV.pdf) ·
 [LinkedIn](https://www.linkedin.com/in/gerenigusie) ·
 [Email](mailto:gere.nigusie@gmail.com) ·
 [Portfolio](https://gnigusie.github.io/)
 
-## My GitHub Status
+## GitHub Status
 
 ![Streak stats](./streak-stats.svg)
 

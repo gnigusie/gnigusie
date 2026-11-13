@@ -7,8 +7,8 @@ AI Engineer and Software Developer specializing in Generative AI, NLP, and Compu
 [Email](mailto:gere.nigusie@gmail.com) ·
 [Portfolio](https://gnigusie.github.io/)
 
-## My GitHub Stats
+## My GitHub Status
 
 ![Streak stats](./streak-stats.svg)
 
-[View my GitHub contributions and activity](https://github.com/gnigusie?tab=overview)
+![Visitors](https://komarev.com/ghpvc/?username=gnigusie&label=Visitors&color=0e75b6&style=flat)

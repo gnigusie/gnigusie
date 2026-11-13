@@ -1,6 +1,6 @@
 # Gebregziabihier Nigusie Birhane
 
-AI Engineer working across Generative AI, NLP, Computer Vision, and applied machine learning.
+AI Engineer and Software Developer specializing in Generative AI, NLP, and Computer Vision.
 
 [CV](https://gnigusie.github.io/Gebregziabihier_Nigusie_CV.pdf) ·
 [LinkedIn](https://www.linkedin.com/in/gerenigusie) ·
@@ -10,7 +10,5 @@ AI Engineer working across Generative AI, NLP, Computer Vision, and applied mach
 ## My GitHub Stats
 
 ![Streak stats](./streak-stats.svg)
-
-![GitHub metrics](./github-metrics.svg)
 
 [View my GitHub contributions and activity](https://github.com/gnigusie?tab=overview)

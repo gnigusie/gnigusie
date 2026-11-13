@@ -21,88 +21,114 @@ jobs:
           from datetime import date, datetime, timedelta
 
           TOKEN = os.environ["GH_TOKEN"]
-          USER = os.environ["GH_USER"]
+          USERNAME = os.environ["GH_USER"]
 
-          def gql(query, variables):
-              req = urllib.request.Request(
+          COLOR_GREEN = "#7bf1a8"
+          COLOR_BLUE = "#79c0ff"
+          COLOR_DATES = "#a9fef7"
+          COLOR_BORDER = "#e4e2e2"
+          COLOR_BACKGROUND = "#141321"
+
+          def run_graphql(query, variables):
+              request = urllib.request.Request(
                   "https://api.github.com/graphql",
                   data=json.dumps({"query": query, "variables": variables}).encode(),
                   headers={"Authorization": "bearer " + TOKEN,
                            "Content-Type": "application/json",
                            "User-Agent": "streak-card"},
               )
-              with urllib.request.urlopen(req) as r:
-                  data = json.load(r)
-              if "errors" in data:
-                  raise SystemExit(data["errors"])
-              return data["data"]
+              with urllib.request.urlopen(request) as http_response:
+                  payload = json.load(http_response)
+              if "errors" in payload:
+                  raise SystemExit(payload["errors"])
+              return payload["data"]
 
-          created = gql("query($u:String!){user(login:$u){createdAt}}", {"u": USER})["user"]["createdAt"]
-          start_date = datetime.strptime(created[:10], "%Y-%m-%d").date()
+          created_at = run_graphql(
+              "query($login:String!){user(login:$login){createdAt}}",
+              {"login": USERNAME},
+          )["user"]["createdAt"]
+          start_date = datetime.strptime(created_at[:10], "%Y-%m-%d").date()
           today = date.today()
 
-          Q = """query($u:String!,$from:DateTime!,$to:DateTime!){
-            user(login:$u){contributionsCollection(from:$from,to:$to){
+          CONTRIBUTIONS_QUERY = """query($login:String!,$from:DateTime!,$to:DateTime!){
+            user(login:$login){contributionsCollection(from:$from,to:$to){
               contributionCalendar{weeks{contributionDays{date contributionCount}}}}}}"""
 
-          days = {}
-          for y in range(start_date.year, today.year + 1):
-              d = gql(Q, {"u": USER, "from": str(y) + "-01-01T00:00:00Z", "to": str(y) + "-12-31T23:59:59Z"})
-              for w in d["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]:
-                  for c in w["contributionDays"]:
-                      day = datetime.strptime(c["date"], "%Y-%m-%d").date()
-                      if day.year == y:
-                          days[day] = c["contributionCount"]
+          contributions_by_day = {}
+          for year in range(start_date.year, today.year + 1):
+              year_data = run_graphql(CONTRIBUTIONS_QUERY, {
+                  "login": USERNAME,
+                  "from": str(year) + "-01-01T00:00:00Z",
+                  "to": str(year) + "-12-31T23:59:59Z",
+              })
+              calendar = year_data["user"]["contributionsCollection"]["contributionCalendar"]
+              for week in calendar["weeks"]:
+                  for day_entry in week["contributionDays"]:
+                      entry_date = datetime.strptime(day_entry["date"], "%Y-%m-%d").date()
+                      if entry_date.year == year:
+                          contributions_by_day[entry_date] = day_entry["contributionCount"]
 
-          all_days = sorted(k for k in days if k <= today)
-          total = sum(days[k] for k in all_days)
+          all_days = sorted(day_key for day_key in contributions_by_day if day_key <= today)
+          total_contributions = sum(contributions_by_day[day_key] for day_key in all_days)
 
-          longest, run, run_start, l_start, l_end = 0, 0, None, None, None
-          for k in all_days:
-              if days[k] > 0:
-                  if run == 0:
-                      run_start = k
-                  run += 1
-                  if run > longest:
-                      longest, l_start, l_end = run, run_start, k
+          longest_streak = 0
+          running_streak = 0
+          running_start = None
+          longest_start = None
+          longest_end = None
+          for day_key in all_days:
+              if contributions_by_day[day_key] > 0:
+                  if running_streak == 0:
+                      running_start = day_key
+                  running_streak += 1
+                  if running_streak > longest_streak:
+                      longest_streak = running_streak
+                      longest_start = running_start
+                      longest_end = day_key
               else:
-                  run = 0
+                  running_streak = 0
 
-          d = today
-          if days.get(d, 0) == 0:
-              d -= timedelta(days=1)
-          cur_end = d
-          cur = 0
-          while days.get(d, 0) > 0:
-              cur += 1
-              d -= timedelta(days=1)
-          cur_start = d + timedelta(days=1)
+          cursor_day = today
+          if contributions_by_day.get(cursor_day, 0) == 0:
+              cursor_day -= timedelta(days=1)
+          current_end = cursor_day
+          current_streak = 0
+          while contributions_by_day.get(cursor_day, 0) > 0:
+              current_streak += 1
+              cursor_day -= timedelta(days=1)
+          current_start = cursor_day + timedelta(days=1)
 
-          def fmt(x, year=True):
-              return x.strftime("%b %-d, %Y" if year else "%b %-d")
+          def format_date(value, include_year=True):
+              return value.strftime("%b %-d, %Y" if include_year else "%b %-d")
 
-          total_label = fmt(start_date) + " - Present"
-          cur_label = (fmt(cur_start, False) + " - " + fmt(cur_end, False)) if cur > 0 else fmt(today, False)
-          long_label = (fmt(l_start) + " - " + fmt(l_end)) if longest > 0 else "-"
+          total_label = format_date(start_date) + " - Present"
+          if current_streak > 0:
+              current_label = format_date(current_start, False) + " - " + format_date(current_end, False)
+          else:
+              current_label = format_date(today, False)
+          if longest_streak > 0:
+              longest_label = format_date(longest_start) + " - " + format_date(longest_end)
+          else:
+              longest_label = "-"
 
           svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" font-family="Segoe UI, Ubuntu, sans-serif" text-anchor="middle">
-            <rect x="0.5" y="0.5" rx="4.5" width="494" height="194" fill="#141321" stroke="#e4e2e2" stroke-opacity="0.3"/>
-            <line x1="165" y1="48" x2="165" y2="147" stroke="#e4e2e2" stroke-opacity="0.6"/>
-            <line x1="330" y1="48" x2="330" y2="147" stroke="#e4e2e2" stroke-opacity="0.6"/>
-            <text x="82" y="95" font-size="28" font-weight="700" fill="#7bf1a8">{total:,}</text>
-            <text x="82" y="125" font-size="14" fill="#fe428e">Total Contributions</text>
-            <text x="82" y="150" font-size="12" fill="#a9fef7">{total_label}</text>
-            <circle cx="247" cy="82" r="40" fill="none" stroke="#7bf1a8" stroke-width="5"/>
-            <text x="247" y="92" font-size="28" font-weight="700" fill="#f8d847">{cur}</text>
-            <text x="247" y="150" font-size="14" font-weight="700" fill="#f8d847">Current Streak</text>
-            <text x="247" y="170" font-size="12" fill="#a9fef7">{cur_label}</text>
-            <text x="412" y="95" font-size="28" font-weight="700" fill="#7bf1a8">{longest}</text>
-            <text x="412" y="125" font-size="14" fill="#fe428e">Longest Streak</text>
-            <text x="412" y="150" font-size="12" fill="#a9fef7">{long_label}</text>
+            <rect x="0.5" y="0.5" rx="4.5" width="494" height="194" fill="{COLOR_BACKGROUND}" stroke="{COLOR_BORDER}" stroke-opacity="0.3"/>
+            <line x1="165" y1="48" x2="165" y2="147" stroke="{COLOR_BORDER}" stroke-opacity="0.6"/>
+            <line x1="330" y1="48" x2="330" y2="147" stroke="{COLOR_BORDER}" stroke-opacity="0.6"/>
+            <text x="82" y="95" font-size="28" font-weight="700" fill="{COLOR_GREEN}">{total_contributions:,}</text>
+            <text x="82" y="125" font-size="14" fill="{COLOR_BLUE}">Total Contributions</text>
+            <text x="82" y="150" font-size="12" fill="{COLOR_DATES}">{total_label}</text>
+            <circle cx="247" cy="82" r="40" fill="none" stroke="{COLOR_GREEN}" stroke-width="5"/>
+            <text x="247" y="92" font-size="28" font-weight="700" fill="{COLOR_BLUE}">{current_streak}</text>
+            <text x="247" y="150" font-size="14" font-weight="700" fill="{COLOR_BLUE}">Current Streak</text>
+            <text x="247" y="170" font-size="12" fill="{COLOR_DATES}">{current_label}</text>
+            <text x="412" y="95" font-size="28" font-weight="700" fill="{COLOR_GREEN}">{longest_streak}</text>
+            <text x="412" y="125" font-size="14" fill="{COLOR_BLUE}">Longest Streak</text>
+            <text x="412" y="150" font-size="12" fill="{COLOR_DATES}">{longest_label}</text>
           </svg>"""
 
-          with open("streak-stats.svg", "w", encoding="utf-8") as f:
-              f.write(svg)
+          with open("streak-stats.svg", "w", encoding="utf-8") as svg_file:
+              svg_file.write(svg)
           PY
       - name: Commit card
         run: |

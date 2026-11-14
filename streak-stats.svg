@@ -2,7 +2,7 @@
   <rect x="0.5" y="0.5" rx="4.5" width="494" height="194" fill="#141321" stroke="#e4e2e2" stroke-opacity="0.3"/>
   <line x1="165" y1="48" x2="165" y2="147" stroke="#e4e2e2" stroke-opacity="0.6"/>
   <line x1="330" y1="48" x2="330" y2="147" stroke="#e4e2e2" stroke-opacity="0.6"/>
-  <text x="82" y="95" font-size="28" font-weight="700" fill="#7bf1a8">279</text>
+  <text x="82" y="95" font-size="28" font-weight="700" fill="#7bf1a8">283</text>
   <text x="82" y="125" font-size="14" fill="#79c0ff">Total Contributions</text>
   <text x="82" y="150" font-size="12" fill="#a9fef7">Sep 13, 2021 - Present</text>
   <circle cx="247" cy="82" r="40" fill="none" stroke="#7bf1a8" stroke-width="5"/>
